@@ -2,8 +2,6 @@ let directions = "R3, L2, L2, R4, L1, R2, R3, R4, L2, R4, L2, L5, L1, R5, R2, R2
 
 let currentDirection = "N";
 let currentPosition = [0, 0];
-let visited = new Set();
-visited.add(`${currentPosition[0]},${currentPosition[1]}`);
 
 const orientationHelper = {
   "W" : {"L": "S", "R": "N"},
@@ -24,14 +22,6 @@ function changeDirection(turn) {
   currentDirection = orientationHelper[currentDirection][turn];
 }
 
-function checkIfVisited() {
-  let key = `${currentPosition[0]},${currentPosition[1]}`;
-  if (visited.has(key)) {
-    return calculateDistance();
-  } else {
-    visited.add(key);
-  }
-}
 
 function updateCoordinates(instruction) {
   turn = instruction[0];
@@ -62,7 +52,7 @@ function calculateDistance() {
 function main() {
   data = directions.split(", ");
   for (let i = 0; i < data.length; i++) { updateCoordinates(data[i]); }
-  console.log(`CURRENT POSITION: ${currentPosition}`);
+  // console.log(`CURRENT POSITION: ${currentPosition}`);
   console.log(`DISTANCE: ${calculateDistance()}`);
 
   console.log("======================================");
